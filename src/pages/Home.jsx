@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 const APIKEY = 'c275d705806f7faa272c6b30fd2d2038';
@@ -18,6 +18,7 @@ const api = async () => {
 
 const Home = () => {
   const [movie, setMovie] = useState([]);
+  const location = useLocation();
 
   useEffect(() => {
     const fetchMovie = () => {
@@ -33,7 +34,7 @@ const Home = () => {
         {movie.map(movie => {
           return (
             <li style={{ marginTop: 10, marginBottom: 10 }} key={movie.id}>
-              <Link to={`/movies/${movie.id}`}>
+              <Link to={`/movies/${movie.id}`} state={{ from: location }}>
                 {movie.title || movie.name}
               </Link>
             </li>

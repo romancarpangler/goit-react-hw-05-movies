@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 const APIKEY = 'c275d705806f7faa272c6b30fd2d2038';
@@ -22,6 +22,7 @@ const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [movie, setMovie] = useState([]);
   const name = searchParams.get('name') ?? '';
+  const location = useLocation();
 
   const submit = e => {
     e.preventDefault();
@@ -35,7 +36,7 @@ const Movies = () => {
   };
   return (
     <>
-      <div>
+      <div style={{ marginTop: 15 }}>
         <form onSubmit={submit}>
           <input value={name} onChange={g}></input>
           <button>serch</button>
@@ -47,7 +48,9 @@ const Movies = () => {
           {movie.map(movi => {
             return (
               <li style={{ marginTop: 10, marginBottom: 10 }} key={movi.id}>
-                <Link to={`/movies/${movi.id}`}>{movi.title}</Link>
+                <Link to={`/movies/${movi.id}`} state={{ from: location }}>
+                  {movi.title}
+                </Link>
               </li>
             );
           })}
@@ -58,5 +61,3 @@ const Movies = () => {
 };
 
 export default Movies;
-
-//
