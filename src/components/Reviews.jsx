@@ -39,7 +39,7 @@ const Reviews = () => {
           {cards.map((card, i) => (
             <li key={i}>
               <div style={{ marginBottom: 20 }}>author: {card.author}</div>
-              <div>{card.content}</div>
+              <div style={{ marginBottom: 20 }}>{card.content}</div>
             </li>
           ))}
         </ul>
